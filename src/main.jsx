@@ -10,6 +10,9 @@ import Home from './Components/Home/Home';
 import Authprovider from './Components/Authentication/Authprovider';
 import Login from './Components/Authentication/Login';
 import Register from './Components/Authentication/Register';
+import Dashbord from './Components/Main/Dashbord';
+import Profile from './Components/Dashbord/Profile';
+import Privet from './Components/Privet/Privet';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +33,16 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: "/dashbord",
+    element: <Dashbord></Dashbord>,
+    children: [
+      {
+        path: "profile",
+        element: <Privet><Profile></Profile></Privet>
+      }
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

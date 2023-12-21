@@ -1,15 +1,29 @@
 import { Link } from "react-router-dom";
-import banner from '../../assets/banner.png'
+import { useContext } from "react";
+import { Authcontext } from "../Authentication/Authprovider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-    const links = <>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to='/about'>About</Link></li>
-        <li><Link to='/details'>Details</Link></li>
-    </>
+    const { user, userLogout } = useContext(Authcontext)
+    const links =
+        <>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to='/about'>About</Link></li>
+            <li><Link to='/details'>Details</Link></li>
+        </>
 
-    const user = false;
-    
+    const handlLogout = () => {
+        userLogout()
+            .then(() => {
+                Swal.fire("User log out!");
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+
+
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -30,21 +44,21 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    { user ? <div className="dropdown dropdown-end">
+                    {user ? <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                <img alt="Tailwind CSS Navbar component" src={banner} />
+                                <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
                             </div>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             <li>
                                 <a className="justify-between">
                                     Name
-                                    <span className="badge">User</span>
+                                    <span className="badge">{user.displayName}</span>
                                 </a>
                             </li>
-                            <li><Link>Dashbord</Link></li>
-                            <li><Link>Login</Link></li>
+                            <li><Link to="/dashbord/profile">Dashbord</Link></li>
+                            <li><Link onClick={handlLogout}>Logout</Link></li>
                         </ul>
                     </div> : <Link to="/login"><button className="btn">Login</button></Link>}
                 </div>
