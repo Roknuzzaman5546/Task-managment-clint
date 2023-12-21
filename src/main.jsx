@@ -13,6 +13,7 @@ import Register from './Components/Authentication/Register';
 import Dashbord from './Components/Main/Dashbord';
 import Profile from './Components/Dashbord/Profile';
 import Privet from './Components/Privet/Privet';
+import Userdetails from './Components/Main/Userdetails';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register></Register>
+      },
+      {
+        path: "/details",
+        element: <Userdetails></Userdetails>
       }
     ]
   },

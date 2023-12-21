@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        styls: "'Sevillana', cursive",
+        alfa: "'Alfa Slab One', serif",
+        lobester: "'Lobster Two', sans-serif"
+      }
+    },
   },
   plugins: [require("daisyui")],
 }
