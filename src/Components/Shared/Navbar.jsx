@@ -2,13 +2,14 @@ import { Link } from "react-router-dom";
 import banner from '../../assets/banner.png'
 
 const Navbar = () => {
-
     const links = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to='/about'>About</Link></li>
         <li><Link to='/details'>Details</Link></li>
     </>
 
+    const user = false;
+    
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -29,7 +30,7 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <div className="dropdown dropdown-end">
+                    { user ? <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
                                 <img alt="Tailwind CSS Navbar component" src={banner} />
@@ -45,7 +46,7 @@ const Navbar = () => {
                             <li><Link>Dashbord</Link></li>
                             <li><Link>Login</Link></li>
                         </ul>
-                    </div>
+                    </div> : <Link to="/login"><button className="btn">Login</button></Link>}
                 </div>
             </div>
         </div>
