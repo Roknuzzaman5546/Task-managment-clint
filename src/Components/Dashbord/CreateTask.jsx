@@ -1,7 +1,11 @@
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast";
+import UseAxiospublic from "../hooks/Useaxiospublic";
+import Swal from "sweetalert2";
 
-const CreateTask = ({ tasks, setTasks }) => {
+const CreateTask = ({ setTasks }) => {
+
+    const axiospublic = UseAxiospublic()
     const {
         register,
         handleSubmit,
@@ -17,9 +21,12 @@ const CreateTask = ({ tasks, setTasks }) => {
             status: "todos"
         }
         setTasks((prev) => {
-            const list = [...prev,  alldata]
-            console.log(list)
-            localStorage.setItem("tasks", JSON.stringify(list))
+            const list = [...prev, alldata]
+            axiospublic.post('/task', alldata)
+                .then(res => {
+                    console.log(res.data)
+                    Swal.fire(`${name} is added succesfully`)
+                })
             return list;
         })
         toast.success("task creat succesfully")

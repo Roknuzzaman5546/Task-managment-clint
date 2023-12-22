@@ -8,7 +8,7 @@ const Banner = () => {
                 <img className=' w-full lg:h-[400px] h-96' src={banner} alt="" />
                 <div className='absolute flex flex-col left-5 top-1/4 h-full bottom-0'>
                     <h2 className=' text-6xl text-blue-600 mb-5 font-styls'>Creat your <br /> task</h2>
-                    <Link to="/dashbord/profile">
+                    <Link to="/dashbord/tasklist">
                         <button className='btn btn-secondary'>Let’s Explore</button>
                     </Link>
                 </div>

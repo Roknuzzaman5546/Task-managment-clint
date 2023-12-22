@@ -57,7 +57,7 @@ const Navbar = () => {
                                     <span className="badge">{user.displayName}</span>
                                 </a>
                             </li>
-                            <li><Link to="/dashbord/profile">Dashbord</Link></li>
+                            <li><Link to="/dashbord/tasklist">Dashbord</Link></li>
                             <li><Link onClick={handlLogout}>Logout</Link></li>
                         </ul>
                     </div> : <Link to="/login"><button className="btn">Login</button></Link>}

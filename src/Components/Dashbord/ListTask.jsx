@@ -3,6 +3,7 @@ import { useDrag, useDrop } from "react-dnd";
 import toast from "react-hot-toast";
 import { FaMinus } from "react-icons/fa6";
 
+
 const ListTask = ({ tasks, setTasks }) => {
     const [todos, setTodos] = useState([])
     const [ongoing, setOngoing] = useState([])
@@ -64,20 +65,37 @@ const Section = ({ status, tasks, setTasks, todos, ongoing, complited }) => {
     }
 
     const addItemToSection = (id) => {
+        console.log(id)
         setTasks((prev) => {
             const mTasks = prev.map(t => {
-                if (t.name == id) {
+                if (t._id == id) {
                     return { ...t, status: status }
                 }
-                return t
+                let taskUpdate = {
+                    status
+                }
+                fetch(`http://localhost:5000/task/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(taskUpdate)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        toast.success("status is changed")
+                    })
+                return t;
             })
-            return mTasks
+            console.log(mTasks)
+            return mTasks;
         })
     }
     return <div ref={drop} className={`w-64 ${isOver ? "bg-slate-200" : ""} `}>
         <Header text={text} bg={bg} count={tasksToMap.length}></Header>
         {tasksToMap.length > 0 && tasksToMap.map((task) => (
-            <Task key={task.name} task={task} tasks={tasks} setTasks={setTasks}></Task>
+            <Task key={task._id} task={task} tasks={tasks} setTasks={setTasks}></Task>
         ))}
     </div>
 }
@@ -97,20 +115,26 @@ const Task = ({ task, tasks, setTasks }) => {
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "task",
-        item: { id: task.name },
+        item: { id: task._id },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging()
         })
     }))
 
-    console.log(isDragging)
-
     const handleremove = (id) => {
         console.log(id)
-        const ftasks = tasks.filter(task => task.name !== id)
+        const ftasks = tasks.filter(task => task._id !== id)
         setTasks(ftasks)
-        toast.success("task is removed")
+        fetch(`http://localhost:5000/task/${id}`, {
+            method: "DELETE",
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                toast.success("task is removed")
+            })
     }
+
     return (
         <div
             ref={drag}
@@ -119,7 +143,7 @@ const Task = ({ task, tasks, setTasks }) => {
                 <h2>
                     {task.name}
                 </h2>
-                <button className=" ml-3 bg-slate-400 w-6 flex items-center justify-center h-6 rounded-full" onClick={() => handleremove(task.name)}><FaMinus></FaMinus></button>
+                <button className=" ml-3 bg-slate-400 w-6 flex items-center justify-center h-6 rounded-full" onClick={() => handleremove(task._id)}><FaMinus></FaMinus></button>
             </div>
         </div>
     )
