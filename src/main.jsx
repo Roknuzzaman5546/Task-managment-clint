@@ -16,6 +16,8 @@ import Privet from './Components/Privet/Privet';
 import Userdetails from './Components/Main/Userdetails';
 import Tasklist from './Components/Dashbord/Tasklist';
 import { Toaster } from 'react-hot-toast';
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 const router = createBrowserRouter([
   {
@@ -59,8 +61,10 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Authprovider>
-      <Toaster></Toaster>
-      <RouterProvider router={router} />
+      <DndProvider backend={HTML5Backend}>
+        <Toaster></Toaster>
+        <RouterProvider router={router} />
+      </DndProvider>
     </Authprovider>
   </React.StrictMode>,
 )
