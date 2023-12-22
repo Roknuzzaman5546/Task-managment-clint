@@ -50,11 +50,11 @@ const Navbar = () => {
                                 <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
                             </div>
                         </div>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-800 text-white rounded-box w-52">
                             <li>
                                 <a className="justify-between">
                                     Name
-                                    <span className="badge">{user.displayName}</span>
+                                    <span className="badge p-4">{user.displayName}</span>
                                 </a>
                             </li>
                             <li><Link to="/dashbord/tasklist">Dashbord</Link></li>

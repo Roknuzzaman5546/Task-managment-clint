@@ -18,6 +18,8 @@ import Tasklist from './Components/Dashbord/Tasklist';
 import { Toaster } from 'react-hot-toast';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import PreviousTask from './Components/Dashbord/PreviousTask';
+import About from './Components/Home/About';
 
 const router = createBrowserRouter([
   {
@@ -39,20 +41,28 @@ const router = createBrowserRouter([
       {
         path: "/details",
         element: <Userdetails></Userdetails>
+      },
+      {
+        path: "/about",
+        element: <About></About>
       }
     ]
   },
   {
     path: "/dashbord",
-    element: <Dashbord></Dashbord>,
+    element: <Privet><Dashbord></Dashbord></Privet>,
     children: [
       {
         path: "profile",
-        element: <Privet><Profile></Profile></Privet>
+        element: <Profile></Profile>
       },
       {
         path: "tasklist",
         element: <Tasklist></Tasklist>
+      },
+      {
+        path: "previoustask",
+        element: <PreviousTask></PreviousTask>
       }
     ]
   }

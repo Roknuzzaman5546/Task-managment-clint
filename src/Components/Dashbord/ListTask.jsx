@@ -22,7 +22,7 @@ const ListTask = ({ tasks, setTasks }) => {
     const stauses = ["todos", "ongoing", "complited"]
 
     return (
-        <div className=" flex gap-20">
+        <div className=" flex lg:flex-row flex-col lg:gap-20 gap-5">
             {stauses.map((staus, index) => <Section
                 key={index}
                 status={staus}
@@ -84,11 +84,11 @@ const Section = ({ status, tasks, setTasks, todos, ongoing, complited }) => {
                     .then(res => res.json())
                     .then(data => {
                         console.log(data)
-                        toast.success("status is changed")
                     })
-                return t;
-            })
-            console.log(mTasks)
+                    return t;
+                })
+                console.log(mTasks)
+                toast.success("status is changed")
             return mTasks;
         })
     }
@@ -120,6 +120,8 @@ const Task = ({ task, tasks, setTasks }) => {
             isDragging: !!monitor.isDragging()
         })
     }))
+
+    console.log(isDragging)
 
     const handleremove = (id) => {
         console.log(id)

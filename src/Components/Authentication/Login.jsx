@@ -5,7 +5,7 @@ import { Authcontext } from "./Authprovider";
 import loginimg from '../../assets/login.svg'
 
 const Login = () => {
-    const { userLogin } = useContext(Authcontext)
+    const { userLogin, usergoogleLogin } = useContext(Authcontext)
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -36,6 +36,16 @@ const Login = () => {
                 console.error(error)
             })
     }
+
+    const handlegooglelogin = () => {
+        usergoogleLogin()
+            .then(result => {
+                console.log(result.user)
+                Swal.fire("User succesfully creat and update profile!");
+                navigate(form)
+            })
+    }
+
     return (
         <div className="hero min-h-screen my-10">
             <div className="hero-content flex-col lg:flex-row gap-10">
@@ -64,8 +74,8 @@ const Login = () => {
                             <button className="btn btn-error">Login</button>
                         </div>
                     </form>
-                    <button className='btn font-bold w-10/12 mx-auto text-2xl'> 
-                    <span className=" text-[#4285F4]">G</span><span className=" text-[#DB4437]">o</span><span className=" text-[#F4B400]">o</span><span className=" text-[#4285F4]">g</span><span className=" text-[#0F9D58]">l</span><span className=" text-[#DB4437]">e</span>
+                    <button onClick={handlegooglelogin} className='btn font-bold w-10/12 mx-auto text-2xl'>
+                        <span className=" text-[#4285F4]">G</span><span className=" text-[#DB4437]">o</span><span className=" text-[#F4B400]">o</span><span className=" text-[#4285F4]">g</span><span className=" text-[#0F9D58]">l</span><span className=" text-[#DB4437]">e</span>
                     </button>
                     <h2 className=" my-2 ml-7">If  you new in our resturent go to <Link to='/register'><span className=' text-blue-500 font-bold text-xl'>Register</span></Link></h2>
                 </div>
