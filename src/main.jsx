@@ -14,6 +14,8 @@ import Dashbord from './Components/Main/Dashbord';
 import Profile from './Components/Dashbord/Profile';
 import Privet from './Components/Privet/Privet';
 import Userdetails from './Components/Main/Userdetails';
+import Tasklist from './Components/Dashbord/Tasklist';
+import { Toaster } from 'react-hot-toast';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Privet><Profile></Profile></Privet>
+      },
+      {
+        path: "tasklist",
+        element: <Tasklist></Tasklist>
       }
     ]
   }
@@ -53,6 +59,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Authprovider>
+      <Toaster></Toaster>
       <RouterProvider router={router} />
     </Authprovider>
   </React.StrictMode>,
